@@ -4,10 +4,10 @@ package object packfar {
 
   val spark: SparkSession = SparkSession.builder.master("local[*]").appName(s"OneVsRestExample").getOrCreate()
   spark.sparkContext.setLogLevel("WARN")
-  var appleDF: DataFrame = spark.read.format("csv").
-    option("header", "true").
-    option("inferSchema", "true").
-    load("/home/farid/Téléchargements/MesLivre/scala/apache-spark-2-master/beginning-apache-spark-2-master/chapter5/data/stocks/aapl-2017.csv")
+  var appleDF: DataFrame = spark.read.format("csv")
+    .option("header", "true")
+    .option("inferSchema", "true")
+    .load("/home/farid/Téléchargements/MesLivre/scala/apache-spark-2-master/beginning-apache-spark-2-master/chapter5/data/stocks/aapl-2017.csv")
 
   def duplic_copute_prev(df: DataFrame, pa: Int): DataFrame = {
     //    var dfbis=df
@@ -30,6 +30,4 @@ package object packfar {
     dfbddf.orderBy($"IND_NB_USER_DST".desc).dropDuplicates("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
     dfbddf
   }
-
-
 }
