@@ -9,7 +9,11 @@ package object packfar {
     .option("inferSchema", "true")
     .load("/home/farid/Téléchargements/MesLivre/scala/apache-spark-2-master/beginning-apache-spark-2-master/chapter5/data/stocks/aapl-2017.csv")
 
-  def duplic_copute_prev(df: DataFrame, pa: Int): DataFrame = {
+  val joint_key = Seq("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
+  val basics_kpis = Seq("IND_NB_USER_DST", "Low", "High")
+  val prvious_months_num = Seq(0, 1, 3, 4, 6, 12)
+
+  def duplicate_rows_specific_previous_month_num(df: DataFrame, pa: Int): DataFrame = {
     //    var dfbis=df
     import org.apache.spark.sql.functions._
     import spark.implicits._
@@ -23,11 +27,13 @@ package object packfar {
     df4
   }
 
-  def duplic_bddf(df: DataFrame): DataFrame = {
+  def assemble_dfs_duplicated(df: DataFrame, month_num: List[Int] = prvious_months_num.toList): DataFrame = {
     import spark.implicits._
-    var dfbddf: DataFrame = duplic_copute_prev(df, 12)
-    Seq(6, 4, 3, 1).foreach(x => dfbddf = dfbddf.union(duplic_copute_prev(df, x)))
-    dfbddf.orderBy($"IND_NB_USER_DST".desc).dropDuplicates("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
-    dfbddf
+    var BDDF: DataFrame = duplicate_rows_specific_previous_month_num(df, month_num.sortWith(_ > _)(1))
+    month_num.sortWith(_ > _).drop(2).foreach(x => BDDF = BDDF.union(duplicate_rows_specific_previous_month_num(df, x)))
+    BDDF.orderBy($"IND_NB_USER_DST".desc).dropDuplicates("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
+    BDDF
   }
+
+
 }
