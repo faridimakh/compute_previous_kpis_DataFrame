@@ -26,7 +26,6 @@ package object packfar {
     val df4 = df3.orderBy($"IND_NB_USER_DST".desc).dropDuplicates("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
     df4
   }
-
   def assemble_dfs_duplicated(df: DataFrame, month_num: List[Int] = basics_kpis_prvious_months): DataFrame = {
     import spark.implicits._
     var BDDF: DataFrame = duplicate_rows_specific_previous_month_num(df, month_num.sortWith(_ > _)(1))
@@ -34,6 +33,4 @@ package object packfar {
     BDDF.orderBy($"IND_NB_USER_DST".desc).dropDuplicates("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
     BDDF
   }
-
-
 }
