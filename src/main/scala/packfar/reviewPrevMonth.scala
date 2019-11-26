@@ -13,16 +13,16 @@ object reviewPrevMonth {
       .withColumn("CD_POSTE_TYPE", concat(lit("Name"), dayofyear(col("Date")).cast("String"))) //j'ajoute la clé(id structure on la deja)
       .withColumnRenamed("Volume", "IND_NB_USER_DST")
       .select("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE", "IND_NB_USER_DST", "Low", "High")
-//
-    val name_all_kpis = Seq(joint_key ++ basics_kpis ++ prvious_months_num.drop(1).map(x => "_PM" + x).flatMap(x => basics_kpis.map(y => y + x))).flatten
+    //
+    val final_columns_df = key_rows ::: basics_kpis ::: basics_kpis_prvious_months.drop(1).map(x => "_PM" + x).flatMap(x => basics_kpis.map(y => y + x))
     //test-------------------------------------------------------------------------------------------------------------------------------
     val kl = assemble_dfs_duplicated(appleDF)
     var op: List[DataFrame] = List[DataFrame]()
-    prvious_months_num.sortWith(_ > _).foreach(x => op = op.+:(kl.withColumn("DATE_ACTION", add_months(col("DATE_ACTION"), x))))
-    val vf = op.reduceLeft(_.join(_, joint_key, joinType = "left")).toDF(name_all_kpis: _*).na.fill(0)
+    basics_kpis_prvious_months.sortWith(_ > _).foreach(x => op = op.+:(kl.withColumn("DATE_ACTION", add_months(col("DATE_ACTION"), x))))
+    val vf = op.reduceLeft(_.join(_, key_rows, joinType = "left")).toDF(final_columns_df: _*).na.fill(0)
     //test-------------------------------------------------------------------------------------------------------------------------------
 
-    val test2 = vf.select("DATE_ACTION", "IND_NB_USER_DST", "IND_NB_USER_DST_PM1", "IND_NB_USER_DST_PM3", "IND_NB_USER_DST_PM4")
+    val test2 = vf.select("DATE_ACTION", "IND_NB_USER_DST", "IND_NB_USER_DST_PM1", "IND_NB_USER_DST_PM3", "IND_NB_USER_DST_PM4", "IND_NB_USER_DST_PM6", "IND_NB_USER_DST_PM12")
       .groupBy("DATE_ACTION")
       .sum()
     test2.orderBy("DATE_ACTION").show()

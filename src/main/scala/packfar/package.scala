@@ -9,9 +9,9 @@ package object packfar {
     .option("inferSchema", "true")
     .load("/home/farid/Téléchargements/MesLivre/scala/apache-spark-2-master/beginning-apache-spark-2-master/chapter5/data/stocks/aapl-2017.csv")
 
-  val joint_key = Seq("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
-  val basics_kpis = Seq("IND_NB_USER_DST", "Low", "High")
-  val prvious_months_num = Seq(0, 1, 3, 4, 6, 12)
+  val key_rows = List("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
+  val basics_kpis = List("IND_NB_USER_DST", "Low", "High")
+  val basics_kpis_prvious_months = List(0, 1, 3, 4, 6, 12)
 
   def duplicate_rows_specific_previous_month_num(df: DataFrame, pa: Int): DataFrame = {
     //    var dfbis=df
@@ -27,7 +27,7 @@ package object packfar {
     df4
   }
 
-  def assemble_dfs_duplicated(df: DataFrame, month_num: List[Int] = prvious_months_num.toList): DataFrame = {
+  def assemble_dfs_duplicated(df: DataFrame, month_num: List[Int] = basics_kpis_prvious_months): DataFrame = {
     import spark.implicits._
     var BDDF: DataFrame = duplicate_rows_specific_previous_month_num(df, month_num.sortWith(_ > _)(1))
     month_num.sortWith(_ > _).drop(2).foreach(x => BDDF = BDDF.union(duplicate_rows_specific_previous_month_num(df, x)))
