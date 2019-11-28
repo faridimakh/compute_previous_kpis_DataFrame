@@ -1,18 +1,8 @@
-import org.apache.spark.sql.{DataFrame, SparkSession}
+package packfar.staicvalues
+import packfar.staicvalues.static_val._
+import org.apache.spark.sql.{DataFrame, Dataset, Row}
 
-package object packfar {
-
-  val spark: SparkSession = SparkSession.builder.master("local[*]").appName(s"OneVsRestExample").getOrCreate()
-  spark.sparkContext.setLogLevel("WARN")
-  var appleDF: DataFrame = spark.read.format("csv")
-    .option("header", "true")
-    .option("inferSchema", "true")
-    .load("/home/farid/Téléchargements/MesLivre/scala/apache-spark-2-master/beginning-apache-spark-2-master/chapter5/data/stocks/aapl-2017.csv")
-
-  val key_rows = List("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
-  val basics_kpis = List("IND_NB_USER_DST", "Low", "High")
-  val basics_kpis_prvious_months = List(0, 1, 3, 4, 6, 12)
-
+object functions {
   def duplicate_rows_specific_previous_month_num(df: DataFrame, pa: Int): DataFrame = {
     //    var dfbis=df
     import org.apache.spark.sql.functions._
@@ -23,7 +13,7 @@ package object packfar {
     Seq("IND_NB_USER_DST", "Low", "High")
       .foreach(x => df1 = df1.withColumn(x, lit(0)))
     val df3 = df.union(df1)
-    val df4 = df3.orderBy($"IND_NB_USER_DST".desc).dropDuplicates("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
+    val df4: Dataset[Row] = df3.orderBy($"IND_NB_USER_DST".desc).dropDuplicates("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
     df4
   }
   def assemble_dfs_duplicated(df: DataFrame, month_num: List[Int] = basics_kpis_prvious_months): DataFrame = {
