@@ -5,7 +5,7 @@ import org.apache.spark.sql.functions._
 import packfar.staicvalues.functions._
 import packfar.staicvalues.static_val._
 
-object reviewPrevMonth {
+object mainPrevMonth {
   def main(args: Array[String]): Unit = {
 
     spark.sparkContext.setLogLevel("WARN")
@@ -22,6 +22,5 @@ object reviewPrevMonth {
       .groupBy("DATE_ACTION")
       .sum()
     test2.orderBy("DATE_ACTION").show()
-
   }
 }
