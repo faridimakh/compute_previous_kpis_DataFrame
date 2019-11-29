@@ -8,7 +8,7 @@ object static_val {
   var appleDF: DataFrame = spark.read.format("csv")
     .option("header", "true")
     .option("inferSchema", "true")
-    .load("/home/farid/Bureau/requettodellet/appleDF.csv")
+    .load("src/main/source_df/appleDF.csv")
 
   val key_rows = List("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
   val basics_kpis = List("IND_NB_USER_DST", "Low", "High")
