@@ -19,7 +19,7 @@ object mainPrevMonth {
 
     //test-------------------------------------------------------------------------------------------------------------------------------
 
-    val check_result_df = assemble_All_Indicators.select("DATE_ACTION", "IND_NB_USER_DST", "IND_NB_USER_DST_PM1", "IND_NB_USER_DST_PM3", "IND_NB_USER_DST_PM4", "IND_NB_USER_DST_PM6")
+    val check_result_df = assemble_All_Indicators.select("DATE_ACTION", "IND_NB_USER_DST", "IND_NB_USER_DST_PM1", "IND_NB_USER_DST_PM3", "IND_NB_USER_DST_PM4", "IND_NB_USER_DST_PM6","IND_NB_USER_DST_PM12")
       .groupBy("DATE_ACTION")
       .sum()
     check_result_df.orderBy("DATE_ACTION").show()

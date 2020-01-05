@@ -4,7 +4,6 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object static_val {
   val spark: SparkSession = SparkSession.builder.master("local[*]").appName(s"OneVsRestExample").getOrCreate()
-  spark.sparkContext.setLogLevel("WARN")
   var appleDF: DataFrame = spark.read.format("csv")
     .option("header", "true")
     .option("inferSchema", "true")
