@@ -9,19 +9,18 @@ object mainPrevMonth {
   def main(args: Array[String]): Unit = {
 
     spark.sparkContext.setLogLevel("WARN")
-//    save_df(appleDF,1,"data/","aaple")
     //run-------------------------------------------------------------------------------------------------------------------------------
+    spark.sparkContext.setLogLevel("WARN")
     val df_rows_deflated = assemble_dfs_duplicated(appleDF)
-
     var list_Dataframs_Indicators_separated: List[DataFrame] = List[DataFrame]()
     actuels_and_prvious_kpis_months_indices.sortWith(_ > _).foreach(x => list_Dataframs_Indicators_separated = list_Dataframs_Indicators_separated.+:(df_rows_deflated.withColumn("DATE_ACTION", add_months(col("DATE_ACTION"), x))))
     val assemble_All_Indicators = list_Dataframs_Indicators_separated.reduceLeft(_.join(_, key_rows, joinType = "left")).toDF(final_columns_df: _*).na.fill(0)
+    //save result-------------------------------------------------------------------------------------------------------------------------------
+    save_df(assemble_All_Indicators,1,"/home/farid/Bureau/gggg","kpisResultAaple")
 
     //test-------------------------------------------------------------------------------------------------------------------------------
-
-    val check_result_df = assemble_All_Indicators.select("DATE_ACTION", "IND_NB_USER_DST", "IND_NB_USER_DST_PM1", "IND_NB_USER_DST_PM3", "IND_NB_USER_DST_PM4", "IND_NB_USER_DST_PM6","IND_NB_USER_DST_PM12")
-      .groupBy("DATE_ACTION")
-      .sum()
+    val check_result_df: DataFrame = assemble_All_Indicators.select("DATE_ACTION", "IND_NB_USER_DST", "IND_NB_USER_DST_PM1", "IND_NB_USER_DST_PM3", "IND_NB_USER_DST_PM4", "IND_NB_USER_DST_PM6","IND_NB_USER_DST_PM12")
+      .groupBy("DATE_ACTION").sum()
     check_result_df.orderBy("DATE_ACTION").show()
   }
 }

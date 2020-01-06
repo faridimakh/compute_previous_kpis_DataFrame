@@ -19,8 +19,15 @@ object functions {
     import spark.implicits._
     var BDDF: DataFrame = duplicate_rows_specific_previous_month_num(df, month_num.sortWith(_ > _)(1))
     month_num.sortWith(_ > _).drop(2).foreach(x => BDDF = BDDF.union(duplicate_rows_specific_previous_month_num(df, x)))
-    BDDF.orderBy($"IND_NB_USER_DST".desc).dropDuplicates(key_rows)
-    BDDF
+    BDDF.orderBy($"IND_NB_USER_DST".desc).dropDuplicates(key_rows).orderBy("DATE_ACTION")
+  }
+  def save_df(save_this_df: DataFrame, nb_partition: Int = 1,
+              path_saving_df: String ,
+              name_saving_df: String,
+              format_saving_df: String = "com.databricks.spark.csv",
+              mode_saving_df: String = "Overwrite"): Unit = {
+    save_this_df.coalesce(nb_partition).write.mode(mode_saving_df).format(format_saving_df).option("header", "true")
+      .save(path_saving_df +"/"+ name_saving_df)
   }
 
 }
