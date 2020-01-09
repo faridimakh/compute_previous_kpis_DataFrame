@@ -10,7 +10,6 @@ object mainPrevMonth {
 
     spark.sparkContext.setLogLevel("WARN")
     //run-------------------------------------------------------------------------------------------------------------------------------
-    spark.sparkContext.setLogLevel("WARN")
     val df_rows_deflated = assemble_dfs_duplicated(appleDF)
     var list_Dataframs_Indicators_separated: List[DataFrame] = List[DataFrame]()
     actuels_and_prvious_kpis_months_indices.sortWith(_ > _).foreach(x => list_Dataframs_Indicators_separated = list_Dataframs_Indicators_separated.+:(df_rows_deflated.withColumn("DATE_ACTION", add_months(col("DATE_ACTION"), x))))
