@@ -3,12 +3,12 @@ package packfar.staicvalues
 import packfar.staicvalues.functions._
 import packfar.staicvalues.static_val.{kpis_cols, spark, _}
 
-object mainclass {
+object main_class {
   def main(args: Array[String]): Unit = {
     spark.sparkContext.setLogLevel("WARN")
 
     //    compute :
-    val res = calulprev(appleDF, key_cols, kpis_cols, List(1))
+    val res = calulprev(appleDF, key_cols, kpis_cols, List(1,3,4,6,12))
 
     //    save result:
     save_df(res, 1, "/root/Desktop/all/saveResult", "kpisResultAaple")
