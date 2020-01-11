@@ -7,14 +7,14 @@ object mainclass {
   def main(args: Array[String]): Unit = {
     spark.sparkContext.setLogLevel("WARN")
 
-    //    compute:
-    val ggg = calulprev(appleDF, key_cols, kpis_cols, List(1))
+    //    compute :
+    val res = calulprev(appleDF, key_cols, kpis_cols, List(1))
 
     //    save result:
-    save_df(ggg, 1, "/root/Desktop/all/saveResult", "kpisResultAaple")
+    save_df(res, 1, "/root/Desktop/all/saveResult", "kpisResultAaple")
 
     //    test result:
-    val check_result_df = ggg.select(key_cols.head, ggg.columns.filter(x => x.startsWith("IND_NB_USER_DST")): _*)
+    val check_result_df = res.select(key_cols.head, res.columns.filter(x => x.startsWith("IND_NB_USER_DST")): _*)
       .groupBy(key_cols.head).sum()
     check_result_df.orderBy(key_cols.head).show()
   }
