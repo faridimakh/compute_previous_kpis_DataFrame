@@ -9,7 +9,7 @@ object functions {
   /**
    *
    * @param df_inpute :your data frame
-   * @param keyCols   :columns represent the key of each row in the Dataframe(must contain date column)
+   * @param keyCols   :columns represent the key of each row in the Dataframe (must contain date column)
    * @param kpisCols  : columns represent indicators numerical in the Dataframe
    * @param numMonths :list of previous months that you hope calculate indicators
    * @return
@@ -40,11 +40,11 @@ object functions {
 
   /**
    *
-   * @param save_this_df     :datadrame to save
-   * @param nb_partition     : number of partition on savcing 'save_this_df'(default tuned to 1)
+   * @param save_this_df     :Datadrame to save
+   * @param nb_partition     : number of partition on saving 'save_this_df'(default tuned to 1)
    * @param path_saving_df   path where save 'save_this_df'
    * @param name_saving_df   saving 'save_this_df' as this name
-   * @param format_saving_df fomat saving (csv, json...)[default tuned to 'csv']
+   * @param format_saving_df format saving (csv, json...)[default tuned to 'csv']
    * @param mode_saving_df   mode saving (default tuned to 'Overwrite')
    */
   def save_df(save_this_df: DataFrame, nb_partition: Int = 1,
