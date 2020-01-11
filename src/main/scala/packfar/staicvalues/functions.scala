@@ -31,11 +31,12 @@ object functions {
     var df1 = df_inpute.union(df_variable) //add df0
     //drop duplacated, before must sort by colums keys
     df1 = df1.sort(keyCols.map(x => col(x).asc): _*).dropDuplicates(keyCols)
-
-    val df_final = List(0 :: numMonths).flatten
-      .map(x => df1.withColumn(keyCols.head, add_months(col(keyCols.head), x))).reduceLeft(_.join(_, keyCols, "left"))
-      .toDF(columns_df_result: _*).na.fill(0).sort(keyCols.map(x => col(x).asc): _*)
-    df_final
+    //final result
+    List(0 :: numMonths).flatten
+      .map(x => df1.withColumn(keyCols.head, add_months(col(keyCols.head), x)))
+      .reduceLeft(_.join(_, keyCols, "left"))
+      .toDF(columns_df_result: _*).na.fill(0)
+      .sort(keyCols.map(x => col(x).asc): _*)
   }
 
   /**

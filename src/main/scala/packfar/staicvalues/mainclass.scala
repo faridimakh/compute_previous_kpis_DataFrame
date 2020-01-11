@@ -8,7 +8,7 @@ object mainclass {
     spark.sparkContext.setLogLevel("WARN")
 
     //    compute:
-    val ggg = calulprev(appleDF, key_cols, kpis_cols, List(1, 3, 4, 6, 12))
+    val ggg = calulprev(appleDF, key_cols, kpis_cols, List(1))
 
     //    save result:
     save_df(ggg, 1, "/root/Desktop/all/saveResult", "kpisResultAaple")
