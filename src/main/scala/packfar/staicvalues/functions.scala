@@ -9,12 +9,13 @@ object functions {
   /**
    *
    * @param df_inpute :your data frame
-   * @param keyCols   :columns represent the key of each row in the Dataframe (must contain date column)
-   * @param kpisCols  : columns represent indicators numerical in the Dataframe
-   * @param numMonths :list of previous months that you hope calculate indicators
+   * @param keyCols   :columns represent the key of each row in the Dataframe (must contain date type column)
+   * @param kpisCols  : columns represent indicators numerical in the Dataframe (actual KPis)
+   * @param numMonths :list of previous months that you hope calculate indicators (list of integers example List(1,2,3) mean
+   *                  compute mes privious kpi,1month ago, 2 month ago and 3 month ego)
    * @return
    */
-  def calulprev(df_inpute: DataFrame, keyCols: List[String], kpisCols: List[String], numMonths: List[Int]): DataFrame = {
+  def calule_previous_kpis(df_inpute: DataFrame, keyCols: List[String], kpisCols: List[String], numMonths: List[Int]): DataFrame = {
     val columns_df_result: Seq[String] = keyCols ::: kpisCols ::: List(0 :: numMonths).flatten.drop(1)
       .map(x => "_PM" + x).flatMap(x => kpisCols.map(y => y + x))
     //estract max date
@@ -53,7 +54,10 @@ object functions {
               name_saving_df: String,
               format_saving_df: String = "com.databricks.spark.csv",
               mode_saving_df: String = "Overwrite"): Unit = {
-    save_this_df.coalesce(nb_partition).write.mode(mode_saving_df).format(format_saving_df).option("header", "true")
+    save_this_df.coalesce(nb_partition).
+      write.mode(mode_saving_df).
+      format(format_saving_df).
+      option("header", "true")
       .save(path_saving_df + "/" + name_saving_df)
   }
 

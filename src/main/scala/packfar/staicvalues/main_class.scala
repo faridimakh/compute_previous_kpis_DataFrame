@@ -8,10 +8,10 @@ object main_class {
     spark.sparkContext.setLogLevel("WARN")
 
     //    compute :
-    val res = calulprev(appleDF, key_cols, kpis_cols, List(1,3,4,6,12))
+    val res = calule_previous_kpis(appleDF, key_cols, kpis_cols, List(1,3,4))
 
     //    save result:
-    save_df(res, 1, "/root/Desktop/all/saveResult", "kpisResultAaple")
+    save_df(res, 1, "/home/farid/Bureau/JavaSimple", "kpisResultAaple")
 
     //    test result:
     val check_result_df = res.select(key_cols.head, res.columns.filter(x => x.startsWith("IND_NB_USER_DST")): _*)
