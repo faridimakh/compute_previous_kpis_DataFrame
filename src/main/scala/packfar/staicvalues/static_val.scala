@@ -14,6 +14,5 @@ object static_val {
 
   val key_cols = List("DATE_ACTION", "ID_STRUCTURE", "CD_POSTE_TYPE")
   val kpis_cols = List("IND_NB_USER_DST", "Low", "High")
-
-
+  val list_months_to_compute=List(1,3,4)
 }

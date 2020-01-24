@@ -42,7 +42,7 @@ object functions {
 
   /**
    *
-   * @param save_this_df     :Datadrame to save
+   * @param save_this_df     :Dataframe to save
    * @param nb_partition     : number of partition on saving 'save_this_df'(default tuned to 1)
    * @param path_saving_df   path where save 'save_this_df'
    * @param name_saving_df   saving 'save_this_df' as this name

@@ -8,7 +8,7 @@ object main_class {
     spark.sparkContext.setLogLevel("WARN")
 
     //    compute :
-    val res = calule_previous_kpis(appleDF, key_cols, kpis_cols, List(1,3,4))
+    val res = calule_previous_kpis(appleDF, key_cols, kpis_cols, list_months_to_compute)
 
     //    save result:
     save_df(res, 1, "/home/farid/Bureau/JavaSimple", "kpisResultAaple")
