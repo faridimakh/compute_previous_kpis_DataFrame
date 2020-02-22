@@ -2,7 +2,7 @@ package packfar.staicvalues
 
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions.{add_months, col, lit}
-import packfar.staicvalues.static_val._
+import static_val.spark
 
 object functions {
 
