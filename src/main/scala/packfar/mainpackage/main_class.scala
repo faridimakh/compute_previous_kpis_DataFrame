@@ -14,6 +14,7 @@ object main_class {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // process :
     val res = calule_previous_kpis(appleDF, key_cols, kpis_cols, list_months_to_compute)
+    println("compute previous Kpis ongoing process ...")
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //cleaning the storage directory before saving
@@ -26,12 +27,14 @@ object main_class {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //delete unnecessary files from the storage directory
     clean_unnecessary_files_after_storage_process_result
+    println("process finish successfully your result file is stored in :" + output_save_path)
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //    uncomment the following lines to check the result :
-    //    val check_result_df = res.select(key_cols.head, res.columns.filter(x => x.startsWith("IND_NB_USER_DST")): _*)
-    //      .groupBy(key_cols.head).sum()
-    //    check_result_df.orderBy(key_cols.head).show()
+    //uncomment the following lines to check the result :
+//    println("verification result ongoing process ...")
+//    val check_result_df = res.select(key_cols.head, res.columns.filter(x => x.startsWith("IND_NB_USER_DST")): _*)
+//      .groupBy(key_cols.head).sum()
+//    check_result_df.orderBy(key_cols.head).show()
+//
   }
-
 }

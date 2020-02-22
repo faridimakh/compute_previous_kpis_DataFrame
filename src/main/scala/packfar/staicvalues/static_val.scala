@@ -22,7 +22,7 @@ object static_val {
 
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //the previous months that you want compute compute
-  lazy val list_months_to_compute = List(1, 2, 6, 9)
+  lazy val list_months_to_compute: List[Int] = Set(1,1,9,5,5,1,2,2,2,7).toList.sorted //we use Set for bock duplicate months
 
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //shell commands for cleanning path storage:
