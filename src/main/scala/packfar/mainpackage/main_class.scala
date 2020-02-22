@@ -7,17 +7,31 @@ object main_class {
 
   def main(args: Array[String]): Unit = {
 
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // stop logs :
     spark.sparkContext.setLogLevel("WARN")
-    //    compute :
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // process :
     val res = calule_previous_kpis(appleDF, key_cols, kpis_cols, list_months_to_compute)
 
-    //    save result:
-    save_df(res, 4, output_save_path, name_file_output_result)
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //cleaning the storage directory before saving
+    clean_storage_before_next_process
 
-    //    test result:
-    val check_result_df = res.select(key_cols.head, res.columns.filter(x => x.startsWith("IND_NB_USER_DST")): _*)
-      .groupBy(key_cols.head).sum()
-    check_result_df.orderBy(key_cols.head).show()
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //save result:
+    save_df(res, 1, output_save_path, name_file_output_result)
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //delete unnecessary files from the storage directory
+    clean_unnecessary_files_after_storage_process_result
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //    uncomment the following lines to check the result :
+    //    val check_result_df = res.select(key_cols.head, res.columns.filter(x => x.startsWith("IND_NB_USER_DST")): _*)
+    //      .groupBy(key_cols.head).sum()
+    //    check_result_df.orderBy(key_cols.head).show()
   }
 
 }
