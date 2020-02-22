@@ -35,6 +35,6 @@ object main_class {
 //    val check_result_df = res.select(key_cols.head, res.columns.filter(x => x.startsWith("IND_NB_USER_DST")): _*)
 //      .groupBy(key_cols.head).sum()
 //    check_result_df.orderBy(key_cols.head).show()
-//
+
   }
 }

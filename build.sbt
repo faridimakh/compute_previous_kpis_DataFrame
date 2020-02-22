@@ -6,7 +6,6 @@ scalaVersion := "2.12.0"
 
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % spark_version,
   "org.apache.spark" %% "spark-sql" % spark_version,
   "com.typesafe" % "config" % "1.3.1",
   "org.scala-lang" % "scala-library" % scalaVersion.value
