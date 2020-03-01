@@ -1,7 +1,7 @@
 package packfar.mainpackage
 
-import packfar.staicvalues.functions.{calule_previous_kpis, save_df}
-import packfar.staicvalues.static_val._
+import packfar.toolkit.functions.{calule_previous_kpis, save_df}
+import packfar.toolkit.static_val._
 
 object main_class {
 
@@ -14,7 +14,7 @@ object main_class {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // process :
     val res = calule_previous_kpis(appleDF, key_cols, kpis_cols, list_months_to_compute)
-    println("compute previous Kpis ongoing process ...")
+    println("compute previous Kpis going process ...")
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //cleaning the storage directory before saving

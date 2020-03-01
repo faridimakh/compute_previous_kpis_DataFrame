@@ -1,4 +1,4 @@
-package packfar.staicvalues
+package packfar.toolkit
 
 import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.spark.sql.{DataFrame, SparkSession}
