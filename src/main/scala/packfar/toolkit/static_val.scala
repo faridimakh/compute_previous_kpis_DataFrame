@@ -27,7 +27,7 @@ object static_val {
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //shell commands for cleanning path storage:
 
-  lazy val clean_storage_before_next_process: Int = Seq("rm", "-r", output_save_path + "/").!
+//  lazy val clean_storage_before_next_process: Int = Seq("rm", "-r", output_save_path + "/").!
   lazy val clean_unnecessary_files_after_storage_process_result: Int = Seq("find", output_save_path, "-not", "-name", "*.csv", "-type", "f", "-delete").!
 
 

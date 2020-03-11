@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaCompilerConfiguration">
-    <profile name="sbt 1" modules="compute_previous_Kpis" />
+    <profile name="sbt 1" modules="compute_previous_Kpis,compute_previous_kpis_dataframe_4909" />
   </component>
 </project>

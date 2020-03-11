@@ -2,7 +2,7 @@ package packfar.toolkit
 
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions.{add_months, col, lit}
-import static_val.spark
+import packfar.toolkit.static_val.spark
 
 object functions {
 
