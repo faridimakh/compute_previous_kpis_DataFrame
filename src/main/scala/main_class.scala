@@ -1,5 +1,5 @@
-import packfar.toolkit.functions.{calule_previous_kpis, save_df}
-import packfar.toolkit.static_val._
+import toolkit.functions.{calule_previous_kpis, save_df}
+import toolkit.static_val._
 
 object main_class {
 

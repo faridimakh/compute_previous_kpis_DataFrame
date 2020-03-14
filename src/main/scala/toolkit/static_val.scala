@@ -1,4 +1,4 @@
-package packfar.toolkit
+package toolkit
 
 import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.spark.sql.{DataFrame, SparkSession}
@@ -6,7 +6,6 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import scala.sys.process._
 
 object static_val {
-
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   final val my_conf: Config = ConfigFactory.load("application.conf")
   final lazy val input_data: String = my_conf.getString("data.input")
