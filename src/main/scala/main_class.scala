@@ -25,7 +25,7 @@ object main_class {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //delete unnecessary files from the storage directory
     clean_unnecessary_files_after_storage_process_result
-    println("process finish successfully your result file is stored in :" + output_save_path)
+    println("\nprocess finish successfully your result file is stored in :\t\t" + "["+output_save_path+"]")
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //uncomment the following lines to check the result :
